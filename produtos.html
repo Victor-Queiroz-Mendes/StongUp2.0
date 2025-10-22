@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - Strong Up</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header (igual em todas as páginas) -->
+    <header class="header">
+        <div class="header-content">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="logo">STRONG <span>UP</span></h1>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="produtos.html" class="nav-link">Produtos</a>
+                <a href="contato.html" class="nav-link">Contato</a>
+            </nav>
+            <div class="header-icons">
+                <button class="icon-btn search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="carrinho.html" class="icon-btn cart-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu Lateral (igual) -->
+    <nav class="sidebar" id="sidebar">...</nav>
+
+    <!-- Conteúdo Específico da Página -->
+    <main class="main-content">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> > <span>Produtos</span>
+        </div>
+
+        <div class="filters-sidebar">
+            <h3>Filtrar Produtos</h3>
+            <div class="filter-group">
+                <h4>Categoria</h4>
+                <div class="filter-options">
+                    <label><input type="checkbox"> Proteínas</label>
+                    <label><input type="checkbox"> Pré-Treino</label>
+                    <label><input type="checkbox"> Vitaminas</label>
+                </div>
+            </div>
+            <!-- Mais filtros -->
+        </div>
+
+        <section class="featured-products">
+            <h2 class="section-title">TODOS OS PRODUTOS</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Produtos carregados via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/produtos.js"></script>
+</body>
+</html>

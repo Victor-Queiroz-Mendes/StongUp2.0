@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>StrongUp - Contato</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">StrongUp</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="carrinho.html">Carrinho (<span id="cart-count">0</span>)</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Contato / FAQ</h2>
+    <p>Tem alguma dúvida? Envie um e-mail para <a href="mailto:contato@strongup.example">contato@strongup.example</a> ou use o formulário abaixo.</p>
+    <form id="contato-form">
+      <label>Nome<input type="text" name="nome" required></label>
+      <label>E-mail<input type="email" name="email" required></label>
+      <label>Mensagem<textarea name="mensagem" required></textarea></label>
+      <button class="btn" type="submit">Enviar</button>
+    </form>
+    <div id="contato-msg"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2025 StrongUp</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

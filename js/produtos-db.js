@@ -1,0 +1,147 @@
+// Banco de dados de produtos
+const PRODUTOS_DATABASE = [
+    {
+        id: 1,
+        name: "Whey Protein Isolado",
+        description: "100% puro, alta absorção",
+        price: 149.90,
+        category: "proteinas",
+        image: "whey-isolado.jpg",
+        inStock: true,
+        discount: 15,
+        new: false,
+        features: ["Zero Lactose", "27g Proteína/dose", "Zero Açúcar"]
+    },
+    {
+        id: 2,
+        name: "Pré-Treino Explosive",
+        description: "Energia máxima para seus treinos",
+        price: 89.90,
+        category: "pre-treino",
+        image: "pre-treino.jpg",
+        inStock: true,
+        discount: null,
+        new: true,
+        features: ["300mg Cafeína", "Beta Alanina", "L-Citrulina"]
+    },
+    {
+        id: 3,
+        name: "BCAA 2:1:1",
+        description: "Recuperação muscular avançada",
+        price: 69.90,
+        category: "aminoacidos",
+        image: "bcaa.jpg",
+        inStock: true,
+        discount: null,
+        new: false,
+        features: ["Leucina", "Isoleucina", "Valina"]
+    },
+    {
+        id: 4,
+        name: "Creatina Monohidratada",
+        description: "Para força e massa muscular",
+        price: 89.90,
+        category: "creatinas",
+        image: "creatina.jpg",
+        inStock: true,
+        discount: 20,
+        new: false,
+        features: ["Creapure®", "100% Pura", "Micronizada"]
+    },
+    {
+        id: 5,
+        name: "Termogênico Ultimate",
+        description: "Queima de gordura intensiva",
+        price: 79.90,
+        category: "termogenicos",
+        image: "termo.jpg",
+        inStock: true,
+        discount: null,
+        new: true,
+        features: ["Cafeína", "L-Carnitina", "Chá Verde"]
+    },
+    {
+        id: 6,
+        name: "Multivitamínico Plus",
+        description: "Complexo vitamínico completo",
+        price: 49.90,
+        category: "vitaminas",
+        image: "vitaminas.jpg",
+        inStock: true,
+        discount: 10,
+        new: false,
+        features: ["23 Vitaminas", "Minerais", "Antioxidantes"]
+    },
+    {
+        id: 7,
+        name: "Ômega 3 Premium",
+        description: "EPA e DHA concentrados",
+        price: 59.90,
+        category: "omega",
+        image: "omega.jpg",
+        inStock: true,
+        discount: null,
+        new: false,
+        features: ["1000mg", "EPA/DHA", "Sem refluxo"]
+    },
+    {
+        id: 8,
+        name: "Proteína Vegana",
+        description: "Blend proteico vegetal",
+        price: 99.90,
+        category: "naturais",
+        image: "prot-veg.jpg",
+        inStock: true,
+        discount: null,
+        new: true,
+        features: ["Ervilha", "Arroz", "Hemp"]
+    },
+    {
+        id: 9,
+        name: "Hipercalórico Mass",
+        description: "Para ganho de peso saudável",
+        price: 119.90,
+        category: "hipercaloricos",
+        image: "mass.jpg",
+        inStock: true,
+        discount: 25,
+        new: false,
+        features: ["1000 kcal", "Vitaminas", "Minerais"]
+    },
+    {
+        id: 10,
+        name: "Kit Definição Total",
+        description: "Whey + BCAA + Creatina",
+        price: 299.90,
+        category: "kits",
+        image: "kit.jpg",
+        inStock: true,
+        discount: 30,
+        new: false,
+        features: ["3 Produtos", "Economia", "Resultado"]
+    },
+    {
+        id: 11,
+        name: "Barra Proteica",
+        description: "Snack proteico delicioso",
+        price: 9.90,
+        category: "lanches",
+        image: "barra.jpg",
+        inStock: true,
+        discount: null,
+        new: true,
+        features: ["20g Proteína", "Baixo Açúcar", "Zero Trans"]
+    },
+    {
+        id: 12,
+        name: "Coqueteleira Premium",
+        description: "600ml com mixer",
+        price: 29.90,
+        category: "acessorios",
+        image: "shaker.jpg",
+        inStock: true,
+        discount: 10,
+        new: false,
+        features: ["BPA Free", "Tampa Segura", "Graduada"]
+    }
+];

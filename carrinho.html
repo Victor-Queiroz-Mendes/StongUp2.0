@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - Strong Up</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="cart-bg">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <h1 class="logo">STRONG <span>UP</span></h1>
+            <div class="header-right">
+                <button class="icon-btn search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="carrinho.html" class="icon-btn cart-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+        <div class="search-bar" id="searchBar">
+            <input type="text" placeholder="Buscar produtos...">
+            <button class="search-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Menu Lateral -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Categorias</h2>
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <ul class="categories">
+            <li><a href="produtos.html?categoria=proteinas"><i class="fas fa-dumbbell"></i> Proteínas</a></li>
+            <li><a href="produtos.html?categoria=pre-treino"><i class="fas fa-bolt"></i> Pré-Treino</a></li>
+            <li><a href="produtos.html?categoria=vitaminas"><i class="fas fa-capsules"></i> Vitaminas</a></li>
+            <li><a href="produtos.html?categoria=termogenicos"><i class="fas fa-fire"></i> Termogênicos</a></li>
+            <li><a href="produtos.html?categoria=naturais"><i class="fas fa-seedling"></i> Naturais</a></li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            <a href="index.html" class="footer-link"><i class="fas fa-home"></i> Home</a>
+            <a href="carrinho.html" class="footer-link"><i class="fas fa-shopping-cart"></i> Carrinho</a>
+            <a href="contato.html" class="footer-link"><i class="fas fa-question-circle"></i> Ajuda</a>
+        </div>
+    </nav>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Conteúdo do Carrinho -->
+    <main class="cart-page">
+        <!-- Cabeçalho com Botão Voltar -->
+        <div class="cart-header">
+            <div class="back-button-container">
+                <a href="index.html" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Voltar para Home
+                </a>
+            </div>
+            <h1>🛒 Meu Carrinho</h1>
+            <p>Revise seus produtos antes de finalizar o pedido</p>
+        </div>
+
+        <!-- Container Principal -->
+        <div class="cart-container">
+            <!-- Lista de Itens (VAI SER PREENCHIDA VIA JAVASCRIPT) -->
+            <div class="cart-items" id="cartItemsContainer">
+                <!-- Os itens do carrinho serão inseridos aqui via JavaScript -->
+                <div class="cart-empty" id="emptyCartMessage">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h2>Seu carrinho está vazio</h2>
+                    <p>Adicione alguns produtos incríveis!</p>
+                    <a href="index.html" class="btn-continue-shopping">
+                        <i class="fas fa-store"></i> Continuar Comprando
+                    </a>
+                </div>
+            </div>
+
+            <!-- Resumo do Pedido -->
+            <div class="cart-summary" id="cartSummary">
+                <h2>Resumo do Pedido</h2>
+                
+                <div class="summary-row">
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value" id="subtotal">R$ 0,00</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span class="summary-label">Frete</span>
+                    <span class="summary-value" id="shipping">R$ 0,00</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span class="summary-label">Desconto</span>
+                    <span class="summary-value" id="discount">-R$ 0,00</span>
+                </div>
+                
+                <div class="summary-row summary-total">
+                    <span class="summary-label">Total</span>
+                    <span class="summary-value" id="total">R$ 0,00</span>
+                </div>
+
+                <!-- Cupom de Desconto -->
+                <div class="coupon-section">
+                    <h4>
+                        <i class="fas fa-tag"></i> Cupom de Desconto
+                    </h4>
+                    <div class="coupon-input">
+                        <input type="text" id="couponInput" placeholder="Digite seu cupom">
+                        <button class="btn-apply-coupon" id="applyCouponBtn">
+                            Aplicar
+                        </button>
+                    </div>
+                    <div class="coupon-suggestions">
+                        <small>Cupons disponíveis: <strong>STRONG10</strong> (10% off)</small>
+                    </div>
+                </div>
+
+                <!-- Ações do Carrinho -->
+                <div class="cart-actions">
+                    <a href="checkout.html" class="btn-checkout" id="checkoutBtn">
+                        <i class="fas fa-lock"></i> FINALIZAR COMPRA
+                    </a>
+                    <button class="btn-clear-cart" id="clearCartBtn">
+                        <i class="fas fa-trash"></i> Limpar Carrinho
+                    </button>
+                    <a href="produtos.html" class="btn-continue-shopping">
+                        <i class="fas fa-plus"></i> Adicionar Mais Produtos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Produtos Sugeridos -->
+        <section class="suggested-products">
+            <h2 class="section-title">Você Também Pode Gostar</h2>
+            <div class="products-grid" id="suggestedProducts">
+                <!-- Produtos sugeridos serão carregados via JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/carrinho.js"></script>
+</body>
+</html>
