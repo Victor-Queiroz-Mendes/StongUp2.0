@@ -30,7 +30,9 @@ class CarrinhoManager {
 
         container.innerHTML = this.cart.map(item => `
             <div class="cart-item" data-id="${item.id}">
-                <div class="cart-item-image"><i class="fas fa-capsules"></i></div>
+                <div class="cart-item-image">
+                    <img src="${item.image || 'images/produtos/placeholder.jpg'}" alt="${item.name}" class="cart-img" onerror="this.onerror=null;this.src='images/produtos/placeholder.jpg';" />
+                </div>
                 <div class="cart-item-info">
                     <h3>${item.name}</h3>
                     <p>${item.description || 'Suplemento de alta qualidade'}</p>

@@ -8,11 +8,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+
     <!-- Header (igual em todas as páginas) -->
     <header class="header">
         <div class="header-content">
             <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
+                <span style="font-size: 24px;">☰</span>
             </button>
             <h1 class="logo">STRONG <span>UP</span></h1>
             <nav class="nav-links">
@@ -32,8 +33,27 @@
         </div>
     </header>
 
-    <!-- Menu Lateral (igual) -->
-    <nav class="sidebar" id="sidebar">...</nav>
+    <!-- Overlay para o menu lateral -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Menu Lateral (sidebar) -->
+    <nav class="sidebar" id="sidebar">
+        <button id="closeMenu" class="close-menu">&times;</button>
+        <ul class="sidebar-categories">
+            <li><a href="proteinas.html">Proteínas</a></li>
+            <li><a href="pre-treino.html">Pré-Treino</a></li>
+            <li><a href="aminoacidos.html">Aminoácidos</a></li>
+            <li><a href="creatinas.html">Creatinas</a></li>
+            <li><a href="termogenicos.html">Termogênicos</a></li>
+            <li><a href="vitaminas.html">Vitaminas</a></li>
+            <li><a href="omega.html">Ômega & Saúde</a></li>
+            <li><a href="naturais.html">Naturais</a></li>
+            <li><a href="hipercaloricos.html">Hipercalóricos</a></li>
+            <li><a href="kits.html">Kits Promocionais</a></li>
+            <li><a href="lanches.html">Lanches Proteicos</a></li>
+            <li><a href="acessorios.html">Acessórios</a></li>
+        </ul>
+    </nav>
 
     <!-- Conteúdo Específico da Página -->
     <main class="main-content">

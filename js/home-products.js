@@ -11,6 +11,27 @@ class HomeProducts {
         this.loadSaleProducts();
     }
 
+    getFallbackImage(category) {
+        // Primeiro tenta imagens locais por categoria
+        const localFallbackImages = {
+            'proteinas': 'images/produtos/proteinas/placeholder.jpg',
+            'pre-treino': 'images/produtos/pre-treino/placeholder.jpg',
+            'aminoacidos': 'images/produtos/aminoacidos/placeholder.jpg',
+            'creatinas': 'images/produtos/creatinas/placeholder.jpg',
+            'termogenicos': 'images/produtos/termogenicos/placeholder.jpg',
+            'vitaminas': 'images/produtos/vitaminas/placeholder.jpg',
+            'omega': 'images/produtos/omega/placeholder.jpg',
+            'naturais': 'images/produtos/naturais/placeholder.jpg',
+            'hipercaloricos': 'images/produtos/hipercaloricos/placeholder.jpg',
+            'kits': 'images/produtos/kits/placeholder.jpg',
+            'lanches': 'images/produtos/lanches/placeholder.jpg',
+            'acessorios': 'images/produtos/acessorios/placeholder.jpg',
+            'default': 'images/produtos/placeholder.jpg'
+        };
+        
+        return localFallbackImages[category] || localFallbackImages.default;
+    }
+
     loadFeaturedProducts() {
         const featured = this.produtos
             .filter(p => p.inStock)
@@ -42,6 +63,7 @@ class HomeProducts {
         container.innerHTML = products.map(product => `
             <div class="product-card" data-id="${product.id}">
                 <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}" onerror="this.onerror=null;this.src='${this.getFallbackImage(product.category)}';" />
                     ${product.discount ? `<span class="discount-tag">-${product.discount}%</span>` : ''}
                     ${product.new ? `<span class="new-tag">NOVO</span>` : ''}
                     ${!product.inStock ? `<span class="out-of-stock-tag">ESGOTADO</span>` : ''}
@@ -71,24 +93,22 @@ class HomeProducts {
 
         // Adicionar ao sistema global do carrinho
         if (typeof STRONG_UP !== 'undefined') {
-            STRONG_UP.cart.push({
-                id: Date.now(),
-                name: product.name,
-                price: product.discount ? this.calculateDiscountPrice(product.price, product.discount) : product.price,
-                quantity: 1,
-                originalPrice: product.price
-            });
-            STRONG_UP.saveCart();
-            alert(`✅ ${product.name} adicionado ao carrinho!`);
+            // ...código legado...
         } else {
             // Fallback para localStorage
-            const cart = JSON.parse(localStorage.getItem('strongUpCart')) || [];
-            cart.push({
-                id: Date.now(),
-                name: product.name,
-                price: product.discount ? this.calculateDiscountPrice(product.price, product.discount) : product.price,
-                quantity: 1
-            });
+            let cart = JSON.parse(localStorage.getItem('strongUpCart')) || [];
+            const existing = cart.find(item => item.id === product.id);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.discount ? this.calculateDiscountPrice(product.price, product.discount) : product.price,
+                    quantity: 1,
+                    description: product.description
+                });
+            }
             localStorage.setItem('strongUpCart', JSON.stringify(cart));
             alert(`✅ ${product.name} adicionado ao carrinho!`);
         }
