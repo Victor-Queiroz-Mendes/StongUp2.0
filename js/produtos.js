@@ -30,8 +30,9 @@ function renderProdutosList(){
   el.querySelectorAll('.add-to-cart').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const id = Number(btn.dataset.id);
-      addToCart(id,1);
-      alert('Produto adicionado ao carrinho (simulado)');
+      if (typeof STRONG_UP !== 'undefined' && STRONG_UP.addProductById) {
+        STRONG_UP.addProductById(id);
+      }
     });
   });
 }
@@ -54,7 +55,11 @@ function renderProdutoDetalhe(){
       </div>
     </div>
   `;
-  document.getElementById('det-add').addEventListener('click', ()=>{ addToCart(p.id,1); alert('Adicionado ao carrinho'); });
+  document.getElementById('det-add').addEventListener('click', ()=>{
+    if (typeof STRONG_UP !== 'undefined' && STRONG_UP.addProductById) {
+      STRONG_UP.addProductById(p.id);
+    }
+  });
 }
 
 // auto render

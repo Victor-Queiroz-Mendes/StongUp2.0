@@ -78,8 +78,7 @@ class HomeProducts {
                             : this.formatPrice(product.price)
                         }
                     </div>
-                    <button class="add-to-cart" ${!product.inStock ? 'disabled' : ''} 
-                            onclick="homeProducts.addToCart(${product.id})">
+                    <button class="add-to-cart" ${!product.inStock ? 'disabled' : ''}>
                         ${!product.inStock ? 'ESGOTADO' : 'Adicionar ao Carrinho'}
                     </button>
                 </div>
@@ -90,27 +89,8 @@ class HomeProducts {
     addToCart(productId) {
         const product = this.produtos.find(p => p.id === productId);
         if (!product || !product.inStock) return;
-
-        // Adicionar ao sistema global do carrinho
-        if (typeof STRONG_UP !== 'undefined') {
-            // ...código legado...
-        } else {
-            // Fallback para localStorage
-            let cart = JSON.parse(localStorage.getItem('strongUpCart')) || [];
-            const existing = cart.find(item => item.id === product.id);
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({
-                    id: product.id,
-                    name: product.name,
-                    price: product.discount ? this.calculateDiscountPrice(product.price, product.discount) : product.price,
-                    quantity: 1,
-                    description: product.description
-                });
-            }
-            localStorage.setItem('strongUpCart', JSON.stringify(cart));
-            alert(`✅ ${product.name} adicionado ao carrinho!`);
+        if (typeof STRONG_UP !== 'undefined' && STRONG_UP.addProductById) {
+            STRONG_UP.addProductById(productId);
         }
     }
 
@@ -160,8 +140,25 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Inicializar
+// Inicializar e delegar evento de clique para os botões da home
 let homeProducts;
 document.addEventListener('DOMContentLoaded', () => {
     homeProducts = new HomeProducts();
+    // Delegação para todos os grids de produtos da home
+    ['featuredProducts', 'newProducts', 'saleProducts'].forEach(gridId => {
+        const grid = document.getElementById(gridId);
+        if (grid) {
+            grid.addEventListener('click', function(e) {
+                const btn = e.target.closest('.add-to-cart');
+                if (btn && !btn.disabled) {
+                    const card = btn.closest('.product-card');
+                    if (card && card.dataset.id) {
+                        if (typeof STRONG_UP !== 'undefined' && STRONG_UP.addProductById) {
+                            STRONG_UP.addProductById(Number(card.dataset.id));
+                        }
+                    }
+                }
+            });
+        }
+    });
 });

@@ -6,8 +6,12 @@
 	<title>Lanches Proteicos - Strong Up</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+	<style>
+		.main-content { padding-top: 20px; }
+		.section-title { color: #ffffff; }
+	</style>
 </head>
-<body>
+<body class="dark-bg">
 	<header class="header">
 		<div class="header-content">
 			<button class="menu-toggle" id="menuToggle">
@@ -65,7 +69,7 @@
 				const grid = document.getElementById('productsGrid');
 				const produtos = PRODUTOS_DATABASE.filter(p => p.category === 'lanches');
 				grid.innerHTML = produtos.map(product => `
-					<div class='product-card'>
+					<div class='product-card' data-id='${product.id}'>
 						<div class='product-image'>
 							<img src='${product.image}' alt='${product.name}' onerror="this.onerror=null;this.src='images/produtos/lanches/placeholder.jpg';" />
 						</div>
@@ -73,7 +77,7 @@
 							<h3>${product.name}</h3>
 							<p>${product.description}</p>
 							<div class='price'>${product.discount ? `<span class='old-price'>R$${product.price}</span> R$${(product.price * (1 - product.discount/100)).toFixed(2)}` : `R$${product.price}`}</div>
-							<button class='add-to-cart' data-id='${product.id}' ${!product.inStock ? 'disabled' : ''}>${!product.inStock ? 'ESGOTADO' : 'ADICIONAR AO CARRINHO'}</button>
+							<button class='add-to-cart' ${!product.inStock ? 'disabled' : ''}>${!product.inStock ? 'ESGOTADO' : 'ADICIONAR AO CARRINHO'}</button>
 						</div>
 					</div>
 				`).join('');

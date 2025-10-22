@@ -6,15 +6,20 @@
     <title>Proteínas - Strong Up</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Overrides locais mínimos para garantir consistência visual */
+        .main-content { padding-top: 20px; }
+        .section-title { color: #ffffff; }
+    </style>
 </head>
-<body>
+<body class="dark-bg">
     <!-- Header (igual em todas as páginas) -->
     <header class="header">
         <div class="header-content">
             <button class="menu-toggle" id="menuToggle">
                 <span style="font-size: 24px;">☰</span>
             </button>
-            <h1 class="logo">STRONG <span>UP</span></h1>
+            <h1 class="logo"><a href="index.html" style="color:inherit;text-decoration:none;">STRONG <span>UP</span></a></h1>
             <nav class="nav-links">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="produtos.html" class="nav-link">Produtos</a>
@@ -76,7 +81,7 @@
                 const grid = document.getElementById('productsGrid');
                 const produtos = PRODUTOS_DATABASE.filter(p => p.category === 'proteinas');
                 grid.innerHTML = produtos.map(product => `
-                    <div class='product-card'>
+                        <div class='product-card' data-id='${product.id}'>
                         <div class='product-image'>
                             <img src='${product.image}' alt='${product.name}' onerror="this.onerror=null;this.src='images/produtos/proteinas/placeholder.jpg';" />
                         </div>
@@ -84,7 +89,7 @@
                             <h3>${product.name}</h3>
                             <p>${product.description}</p>
                             <div class='price'>${product.discount ? `<span class='old-price'>R$${product.price}</span> R$${(product.price * (1 - product.discount/100)).toFixed(2)}` : `R$${product.price}`}</div>
-                            <button class='add-to-cart' ${!product.inStock ? 'disabled' : ''}>${!product.inStock ? 'ESGOTADO' : 'ADICIONAR AO CARRINHO'}</button>
+                                <button class='add-to-cart' ${!product.inStock ? 'disabled' : ''}>${!product.inStock ? 'ESGOTADO' : 'ADICIONAR AO CARRINHO'}</button>
                         </div>
                     </div>
                 `).join('');
@@ -109,7 +114,7 @@
             <button class="menu-toggle" id="menuToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <h1 class="logo">STRONG <span>UP</span></h1>
+            <h1 class="logo"><a href="index.html" style="color:inherit;text-decoration:none;">STRONG <span>UP</span></a></h1>
             <nav class="nav-links">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="produtos.html" class="nav-link">Produtos</a>

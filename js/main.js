@@ -81,21 +81,70 @@ const STRONG_UP = {
     },
     
     handleAddToCart: function(event) {
-        const button = event.target;
-        const productCard = button.closest('.product-card');
-        const productName = productCard.querySelector('h3').textContent;
-        const productPrice = productCard.querySelector('.price').textContent;
-        
-        // Simular adição ao carrinho
-        this.cart.push({
-            id: Date.now(),
-            name: productName,
-            price: productPrice,
-            quantity: 1
-        });
-        
+        // Aceita: evento delegado (event.target é botão) ou chamada com {id: NUMBER}
+        let button = null;
+        let productData = null;
+
+        if (event && event.target) {
+            button = event.target;
+            const productCard = button.closest('.product-card');
+            if (productCard) {
+                const productId = productCard.dataset.id ? Number(productCard.dataset.id) : null;
+                // Buscar dados completos do produto no banco
+                if (window.PRODUTOS_DATABASE && productId) {
+                    const prod = PRODUTOS_DATABASE.find(p => p.id === productId);
+                    if (prod) {
+                        productData = {
+                            id: prod.id,
+                            name: prod.name,
+                            price: Number(prod.discount ? (prod.price * (1 - prod.discount/100)).toFixed(2) : prod.price),
+                            image: prod.image,
+                            description: prod.description,
+                            quantity: 1
+                        };
+                    }
+                }
+            }
+        } else if (event && typeof event === 'object' && event.id) {
+            // chamada STRONG_UP.handleAddToCart({ id: 123 })
+            const id = Number(event.id);
+            if (window.PRODUTOS_DATABASE) {
+                const prod = PRODUTOS_DATABASE.find(p => p.id === id);
+                if (prod) {
+                    productData = {
+                        id: prod.id,
+                        name: prod.name,
+                        price: Number(prod.discount ? (prod.price * (1 - prod.discount/100)).toFixed(2) : prod.price),
+                        image: prod.image,
+                        description: prod.description,
+                        quantity: 1
+                    };
+                }
+            }
+            button = null;
+        }
+
+        if (!productData) return;
+
+        // Normalizar adição: buscar item existente por id
+        const existing = this.cart.find(item => Number(item.id) === Number(productData.id));
+        if (existing) {
+            existing.quantity = (existing.quantity || 1) + 1;
+        } else {
+            this.cart.push(productData);
+        }
+
         this.saveCart();
-        this.showAddToCartFeedback(button);
+        if (button) this.showAddToCartFeedback(button);
+    },
+
+    // API pública para adicionar produto por ID (uso nas páginas de categoria)
+    addProductById: function(id) {
+        try {
+            this.handleAddToCart({ id: Number(id) });
+        } catch (e) {
+            console.error('Erro ao adicionar por id', e);
+        }
     },
     
     showAddToCartFeedback: function(button) {
@@ -149,3 +198,6 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener('error', function(e) {
     console.log('Erro capturado:', e.error);
 });
+
+// Garantir acesso global ao objeto STRONG_UP
+window.STRONG_UP = STRONG_UP;

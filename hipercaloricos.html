@@ -1,1 +1,88 @@
-<!-- Página de Hipercalóricos, igual padrão, menu lateral incluso -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Hipercalóricos - Strong Up</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+	<style>
+		.main-content { padding-top: 20px; }
+		.section-title { color: #ffffff; }
+	</style>
+</head>
+<body class="dark-bg">
+	<header class="header">
+		<div class="header-content">
+			<button class="menu-toggle" id="menuToggle">
+				<span style="font-size: 24px;">☰</span>
+			</button>
+			<h1 class="logo"><a href="index.html" style="color:inherit;text-decoration:none;">STRONG <span>UP</span></a></h1>
+			<nav class="nav-links">
+				<a href="index.html" class="nav-link">Home</a>
+				<a href="produtos.html" class="nav-link">Produtos</a>
+				<a href="contato.html" class="nav-link">Contato</a>
+			</nav>
+			<div class="header-icons">
+				<button class="icon-btn search-btn">
+					<i class="fas fa-search"></i>
+				</button>
+				<a href="carrinho.html" class="icon-btn cart-btn">
+					<i class="fas fa-shopping-cart"></i>
+					<span class="cart-count">0</span>
+				</a>
+			</div>
+		</div>
+	</header>
+	<div id="overlay" class="overlay"></div>
+	<nav class="sidebar" id="sidebar">
+		<button id="closeMenu" class="close-menu">&times;</button>
+		<ul class="sidebar-categories">
+			<li><a href="proteinas.html">Proteínas</a></li>
+			<li><a href="pre-treino.html">Pré-Treino</a></li>
+			<li><a href="aminoacidos.html">Aminoácidos</a></li>
+			<li><a href="creatinas.html">Creatinas</a></li>
+			<li><a href="termogenicos.html">Termogênicos</a></li>
+			<li><a href="vitaminas.html">Vitaminas</a></li>
+			<li><a href="omega.html">Ômega & Saúde</a></li>
+			<li><a href="naturais.html">Naturais</a></li>
+			<li><a href="hipercaloricos.html">Hipercalóricos</a></li>
+			<li><a href="kits.html">Kits Promocionais</a></li>
+			<li><a href="lanches.html">Lanches Proteicos</a></li>
+			<li><a href="acessorios.html">Acessórios</a></li>
+		</ul>
+	</nav>
+	<main class="main-content">
+		<div class="breadcrumb">
+			<a href="index.html">Home</a> > <a href="produtos.html">Produtos</a> > <span>Hipercalóricos</span>
+		</div>
+		<section class="featured-products">
+			<h2 class="section-title">HIPERCALÓRICOS</h2>
+			<div class="products-grid" id="productsGrid"></div>
+		</section>
+	</main>
+	<script src="js/main.js"></script>
+	<script src="js/produtos-db.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			if (typeof PRODUTOS_DATABASE !== 'undefined') {
+				const grid = document.getElementById('productsGrid');
+				const produtos = PRODUTOS_DATABASE.filter(p => p.category === 'hipercaloricos');
+				grid.innerHTML = produtos.map(product => `
+					<div class='product-card' data-id='${product.id}'>
+						<div class='product-image'>
+							<img src='${product.image}' alt='${product.name}' onerror="this.onerror=null;this.src='images/produtos/hipercaloricos/placeholder.jpg';" />
+						</div>
+						<div class='product-info'>
+							<h3>${product.name}</h3>
+							<p>${product.description}</p>
+							<div class='price'>${product.discount ? `<span class='old-price'>R$${product.price}</span> R$${(product.price * (1 - product.discount/100)).toFixed(2)}` : `R$${product.price}`}</div>
+							<button class='add-to-cart' ${!product.inStock ? 'disabled' : ''}>${!product.inStock ? 'ESGOTADO' : 'ADICIONAR AO CARRINHO'}</button>
+						</div>
+					</div>
+				`).join('');
+			}
+		});
+	</script>
+</body>
+</html>
